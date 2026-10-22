@@ -1,6 +1,6 @@
 # Parallel Computer Architecture — Review Platform
 
-A static study site for **Parallel Computer Architecture**, built by **ALi Feras Alghanim**.
+A static study site for **Parallel Computer Architecture**, built by **Ali Feras Alghanim**.
 For every available lecture, it provides a structured review, essay practice with model answers, and a
 20-question multiple-choice quiz with scored results and explanations.
 

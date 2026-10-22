@@ -9,7 +9,7 @@ follow this file and tell the owner about the conflict.
 ## 1. Project purpose
 
 A static study website for the university course **Parallel Computer Architecture**, owned by
-**ALi Feras Alghanim**. For every available lecture, it provides:
+**Ali Feras Alghanim**. For every available lecture, it provides:
 
 - a structured **review page** (objectives, concepts, definitions, comparisons, code, exam points, quick revision),
 - **essay / short-answer practice** with model answers,

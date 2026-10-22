@@ -4,7 +4,7 @@
  */
 
 export const course = {
-  owner: 'ALi Feras Alghanim',
+  owner: 'Ali Feras Alghanim',
   name: 'Parallel Computer Architecture',
   tagline:
     'Lecture reviews, essay practice and 20-question quizzes for every available lecture, so you can revise the ideas, rehearse written answers and check yourself before the exam.',

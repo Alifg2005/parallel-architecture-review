@@ -18,7 +18,7 @@ describe('routes', () => {
   it('home page shows branding, midterm info and a card for every lecture', () => {
     renderAt('/');
     expect(screen.getByRole('heading', { level: 1, name: /Parallel Computer Architecture/ })).toBeInTheDocument();
-    expect(screen.getAllByText('ALi Feras Alghanim').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Ali Feras Alghanim').length).toBeGreaterThan(0);
     expect(screen.getByRole('heading', { name: /Lectures 1–6/ })).toBeInTheDocument();
     expect(screen.getByText('Week 9')).toBeInTheDocument();
     for (const title of ['Why Parallel Computing?', 'MultiCore Processors', 'PThreads', 'Parallel Programming Using OpenMP']) {
