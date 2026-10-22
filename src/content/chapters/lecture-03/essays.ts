@@ -1,0 +1,105 @@
+import type { EssayQuestion } from '../../schema';
+
+export const essays: EssayQuestion[] = [
+  {
+    id: 'l03-e01',
+    style: 'discuss',
+    prompt: 'Why are we building parallel systems? Discuss the physical limits of transistor scaling and the software implications ("the end of the free lunch").',
+    keyConcepts: ['Transistor density drove past gains', 'Power and heat chain', 'Unreliable processors', 'Moore\'s Law slowing', 'Free lunch is over', 'Software must be rewritten'],
+    modelAnswer: [
+      'Historically, performance increased mainly through rising transistor density. Smaller transistors made processors faster, but faster processors consume more power, more power produces more heat, and excessive heat makes processors unreliable. Moore\'s Law has guided the industry for decades, but many expect it to slow as silicon reaches physical limits.',
+      'Manufacturers therefore turned to multi-core designs instead of ever faster single cores. This marks "the end of the free lunch": applications no longer speed up automatically when clock rates increase.',
+      'To benefit from multiple cores, applications must be rewritten using parallel programming techniques. Serial programs usually gain nothing, and adding processors is pointless if programmers do not know how to use them. The challenge has moved from hardware to software.',
+    ],
+    whyItMatters: 'This is the motivation for every programming topic that follows (pthreads, OpenMP). A good answer connects physics to software consequences.',
+    structure: ['Past source of gains', 'Physics chain', 'Shift to multi-core', 'Software implications'],
+  },
+  {
+    id: 'l03-e02',
+    style: 'define-explain',
+    prompt: 'State and explain the goals of building parallel computers.',
+    keyConcepts: ['Performance: execution time or throughput', 'Amdahl\'s Law', 'Power: 4N units at F/4 vs N at F', 'Cost efficiency, scalability, complexity', 'Dependability: redundancy in space'],
+    modelAnswer: [
+      'The **main goal** is better performance, either shorter execution time for one program or higher task throughput. A program\'s execution time is governed by Amdahl\'s Law (its serial part limits the gain).',
+      '**Lower power:** 4N units running at F/4 consume less power than N units at F, while offering the same peak throughput. Slower units can run at lower voltage, and power rises steeply with frequency and voltage.',
+      '**Cost efficiency, scalability and reduced complexity:** it is harder to design a single unit that performs as well as N simpler units, and replicated simple units scale more easily.',
+      '**Dependability:** redundant execution in space (running the same work on several units) allows faults to be detected or tolerated.',
+    ],
+    whyItMatters: 'Examiners often ask for the "other goals" besides speed. The power argument in particular is a favourite.',
+  },
+  {
+    id: 'l03-e03',
+    style: 'compare-contrast',
+    prompt: 'Compare instruction-level, data and task-level parallelism. For each, give the techniques used to exploit it, and relate them to the bit/instruction/task granularity levels.',
+    keyConcepts: ['ILP: pipelining, OoO, speculation, VLIW', 'Data: SIMD vector/array', 'Task: multithreading, multiprocessing', 'Bit-level parallelism', 'Same vs separate instruction streams'],
+    modelAnswer: [
+      '**Instruction-level parallelism** runs different instructions from the same stream in parallel. It is exploited by pipelining, out-of-order execution, speculative execution and VLIW.',
+      '**Data parallelism** applies the same operation to different pieces of data. It is exploited by SIMD hardware: vector processing and array processing.',
+      '**Task-level parallelism** runs different tasks or threads in parallel. It is exploited by multithreading and multiprocessing.',
+      'In terms of granularity, **bit-level** parallelism processes multiple bits at once, **instruction-level** runs instructions from the same stream in parallel, and **task-level** runs separate instruction streams in parallel, moving from fine to coarse.',
+    ],
+    whyItMatters: 'Classification questions are common. Matching each technique to the correct type shows real understanding.',
+  },
+  {
+    id: 'l03-e04',
+    style: 'compare-contrast',
+    prompt: 'Compare shared-memory, distributed-memory and hybrid parallel architectures. What challenge does each create?',
+    keyConcepts: ['Shared address space', 'Cache coherence (MESI)', 'Memory bandwidth bottleneck', 'Own memory per processor', 'Message passing (MPI)', 'Hybrid is most common'],
+    modelAnswer: [
+      '**Shared memory:** all cores or processors access the same memory (laptops, desktops, smartphones). Each core caches shared data, so a coherence protocol such as **MESI** must keep the copies consistent. As cores are added, the demand on **memory bandwidth** grows, and cores may stall if memory cannot keep up.',
+      '**Distributed memory:** each processor has its own memory and communicates over a network (cloud computing, distributed rendering). No cache-coherence mechanism is needed across processors, but data must be exchanged explicitly through **message passing** such as MPI, which adds communication overhead.',
+      '**Hybrid:** networks of shared-memory (multi-core) machines. Most "distributed" systems are hybrids, so they face both kinds of challenge: coherence within a node and message passing between nodes.',
+    ],
+    whyItMatters: 'This distinction decides which programming model fits (threads/OpenMP vs MPI), which is the course\'s main thread.',
+    structure: ['Define each architecture with an example', 'Give the main challenge of each', 'Note that real systems are hybrid'],
+  },
+  {
+    id: 'l03-e05',
+    style: 'compare-contrast',
+    prompt: 'Distinguish a multi-core processor from a multiprocessor system, and tightly coupled from loosely coupled multiprocessors.',
+    keyConcepts: ['Multiple cores on one chip', 'Multiple physical processors', 'Shared resources', 'Tightly coupled = shared memory', 'Loosely coupled = own memory', 'NUMA'],
+    modelAnswer: [
+      'A **multi-core processor** places several cores on a **single chip**. They share the same physical memory and on-chip resources such as caches and I/O, and each core runs its own thread or process.',
+      'A **multiprocessor system** contains multiple **physical processors**, each possibly multi-core. Each processor may have its own memory and cache, though some systems share memory.',
+      '**Tightly coupled** multiprocessors share memory. They must handle cache coherence and bandwidth, which is more complex with several processors (some use NUMA designs), but access to shared data is fast. **Loosely coupled** multiprocessors give each processor its own memory. They avoid coherence mechanisms but must use message passing (MPI) to share data.',
+    ],
+    whyItMatters: 'Terms such as "multi-core", "multiprocessor", "tightly coupled" and "loosely coupled" are easy to blur. Precise definitions earn marks.',
+  },
+  {
+    id: 'l03-e06',
+    style: 'process',
+    prompt: 'Describe how you would measure the speedup, efficiency and scalability of an OpenMP program. Illustrate with a numerical example.',
+    keyConcepts: ['Sequential vs parallel run', 'Speedup = T1 / TN', 'Efficiency = S / N', 'Fair baseline: best-known algorithm', 'Scaling runs 1, 2, 4, 8 threads', 'Strong scaling'],
+    modelAnswer: [
+      '**Speedup:** time the sequential version (without `#pragma omp parallel`), then the parallel version, and divide: S = T₁ / T_N. For fairness, compare against the best-known algorithm on each system, not a deliberately slow serial version.',
+      '**Efficiency:** E = S / N. It ranges from 0 to 1, where 1 means all threads are fully used and lower values indicate overhead or load imbalance.',
+      '**Scalability:** repeat the parallel run with 1, 2, 4, 8 … threads and watch how efficiency changes. Under **strong scaling** the problem size is fixed, so time should ideally fall in proportion to the thread count. A well-scaling program loses little efficiency.',
+      '**Example:** T₁ = 120 s and T₈ = 20 s give S = 6 and E = 6/8 = 0.75. If 16 threads gave 15 s, then S = 8 and E = 0.5, so scaling is degrading, perhaps because of communication overhead in fine-grained tasks or data dependencies.',
+    ],
+    whyItMatters: 'Metric calculations are the most "computable" exam questions. Interpreting the numbers is what earns the remaining marks.',
+  },
+  {
+    id: 'l03-e07',
+    style: 'discuss',
+    prompt: 'Why do parallel systems use many kinds of processors (CPUs, GPUs, FPGAs, clusters)? Include how GPUs came to be.',
+    keyConcepts: ['Task specialisation', 'Power efficiency (FPGA, CPU balance)', 'Heterogeneous HPC: CPU coordinates, GPU crunches', 'Innovation', 'GPU: many simple cores', 'Science plus video games'],
+    modelAnswer: [
+      'Different workloads suit different hardware. CPUs handle general-purpose work and balance performance with power. GPUs handle data-parallel work. FPGAs can be configured for a specific task, which makes them highly power-efficient.',
+      'In HPC, mixing processor types lets each task run on the best-suited unit. For example, CPUs schedule and coordinate while GPUs perform the data crunching. New processor types keep appearing to optimise computations that general-purpose CPUs handle poorly.',
+      'GPUs arose from two needs: computational science wanted to solve the largest problems (galaxy formation, molecular dynamics, climate) quickly, and the video-game industry wanted real-time photo-realistic graphics on consumer hardware, which led to graphics accelerators. The result is a massively parallel processor with many simple cores and thousands of threads, at desktop cost.',
+    ],
+    whyItMatters: 'It shows that you understand heterogeneity as a design choice, which is a recurring theme in modern architecture.',
+  },
+  {
+    id: 'l03-e08',
+    style: 'process',
+    prompt: 'Explain how peak FLOPS is calculated for a core, a node and a whole system, and compute the node FLOPS for 8 cores at 2.5 GHz with 16 FLOPs per cycle.',
+    keyConcepts: ['FLOPs per cycle', 'Cycles per second', 'Cores per node', 'Nodes per system', 'Racks × FLOPS_system', 'Peak vs measured'],
+    modelAnswer: [
+      'FLOPS measures floating-point operations per second and usually means **peak theoretical** performance. Measured FLOPS is the operation count divided by elapsed time.',
+      'Per core: FLOPS_core = FLOPs/cycle × cycles/second. Multi-core adds a factor: FLOPS_node = FLOPs/cycle × cycles/second × cores/node. Adding nodes gives FLOPS_system = … × nodes/system. For a data centre, total = racks × FLOPS_system, assuming every rack is identical and balanced.',
+      'Example: 16 × 2.5×10⁹ × 8 = 3.2×10¹¹ FLOPS = **320 GFLOPS** per node.',
+    ],
+    whyItMatters: 'Shows how explicit parallelism (cores, nodes, racks) multiplies peak performance, which is a straightforward calculation question.',
+  },
+];

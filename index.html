@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Parallel Computer Architecture — Review by ALi Feras Alghanim</title>
+    <meta
+      name="description"
+      content="Lecture reviews, essay practice and 20-question quizzes for Parallel Computer Architecture. Built by ALi Feras Alghanim for midterm preparation."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d1320" media="(prefers-color-scheme: dark)" />
+    <script>
+      // Apply the saved/system theme before first paint (keep in sync with src/lib/theme.ts).
+      (function () {
+        var theme = 'light';
+        try {
+          var saved = localStorage.getItem('pca-theme');
+          if (saved === 'light' || saved === 'dark') theme = saved;
+          else if (window.matchMedia('(prefers-color-scheme: dark)').matches) theme = 'dark';
+        } catch (e) {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) theme = 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>This study site needs JavaScript enabled to run the quizzes and reviews.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
