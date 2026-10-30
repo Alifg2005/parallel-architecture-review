@@ -98,7 +98,7 @@ int main(void) {
           '**Directive:** `#pragma omp parallel` forks a team of threads to run the block. `private(tid)` gives each thread its own `tid`.',
           '**Runtime routine:** `omp_get_thread_num()` returns the calling thread\'s number. The master is **0**, and the others are numbered sequentially.',
           '`omp_set_num_threads(4)` is called before the region. Without it, OpenMP uses its default, typically the number of cores the system reports.',
-          'Precision note: the slide labels `omp_set_num_threads` as an environment variable. It is actually a **runtime library routine**. The equivalent environment variable is `OMP_NUM_THREADS`.',
+          '`omp_set_num_threads` is a runtime library routine. The environment variable is `OMP_NUM_THREADS`.',
         ],
       },
     ],
@@ -168,7 +168,7 @@ int main(void) {
       {
         type: 'code',
         language: 'c',
-        title: 'Clause examples from the lecture',
+        title: 'Clause examples',
         code: `int x = 5;
 #pragma omp parallel firstprivate(x)
 { printf("%d ", x); }                 // every thread prints 5
@@ -262,8 +262,8 @@ printf("Final shared_var: %d\\n", shared_var);`,
       {
         type: 'callout',
         tone: 'warning',
-        title: 'Slide discrepancy',
-        text: 'The lecture\'s list pairs `omp_destroy_lock`, `omp_set_lock` and `omp_unset_lock` with the wrong descriptions (shifted by one line). The table above shows the correct meanings, which also match the lecture\'s own code example (init → set → unset → destroy).',
+        title: 'Check the meanings',
+        text: 'The table shows the correct meaning of each lock routine.',
       },
       {
         type: 'code',
@@ -313,7 +313,7 @@ printf("Final sum: %d\\n", sum);  // 4950`,
 if (answer1 != answer2) { /* ... */ }`,
         explanation: [
           'The two computations are independent, so each `section` can run on a different thread.',
-          'The slide shows `#pragma omp sections` alone. Inside an existing parallel region that works, and on its own you write `#pragma omp parallel sections`.',
+          'Inside an existing parallel region use `#pragma omp sections`; on its own, write `#pragma omp parallel sections`.',
         ],
       },
       {
@@ -366,7 +366,7 @@ if (answer1 != answer2) { /* ... */ }`,
     printf("Thread %d is processing\\n", id);       // all threads
 }`,
         explanation: [
-          'The "reading input" line appears once, from whichever thread arrives first (Thread 4 in the lecture\'s run).',
+          'The "reading input" line appears once, from whichever thread arrives first (Thread 4 in one sample run).',
           'Every thread waits after `single`, so no thread prints "processing" before the input line.',
           'The "notifying" line always comes from Thread 0, and the other threads may already be "processing" meanwhile.',
         ],
@@ -424,7 +424,7 @@ printf("Final serial execution by master thread\\n");`,
       {
         type: 'list',
         items: [
-          'OpenMP implementations use a thread pool, so the **full cost of thread creation and destruction is not paid for each parallel region**. In the lecture\'s example, the 4 threads requested by `omp_set_num_threads(4)` serve both parallel regions.',
+          'OpenMP implementations use a thread pool, so the **full cost of thread creation and destruction is not paid for each parallel region**. For example, the 4 threads requested by `omp_set_num_threads(4)` serve both parallel regions.',
           '**Excess threads degrade performance** through memory use, context switches and other resource overhead.',
           'A **context switch** happens when a CPU switches from one thread to another. With more threads than cores, switches are frequent, and each one saves and restores thread state, costing time and memory.',
         ],
@@ -460,7 +460,7 @@ printf("Final serial execution by master thread\\n");`,
           '2 outer threads, each forking a team of 2, give **4 inner lines**.',
           'Inner thread numbers restart at 0 in each inner team.',
           'If nesting is not enabled, each inner region runs with a team of one, so only 2 inner lines appear.',
-          'Background: newer OpenMP versions deprecate `omp_set_nested` in favour of `omp_set_max_active_levels`. For the exam, use the lecture\'s call.',
+          'Background: newer OpenMP versions deprecate `omp_set_nested` in favour of `omp_set_max_active_levels`. This chapter uses `omp_set_nested`.',
         ],
       },
       {
@@ -505,7 +505,7 @@ printf("Final serial execution by master thread\\n");`,
       {
         type: 'callout',
         tone: 'exam',
-        title: 'Practice question from the lecture',
+        title: 'Practice question',
         text: 'Set the number of threads equal to the number of available processors: `omp_set_num_threads(omp_get_num_procs());`',
       },
     ],

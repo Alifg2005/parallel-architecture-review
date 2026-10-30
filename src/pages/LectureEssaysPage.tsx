@@ -18,7 +18,7 @@ export function LectureEssaysPage() {
       <LectureHeader
         chapter={chapter}
         title={`${meta.title}: Essay practice`}
-        lead="Try each question on your own first, then reveal the model answer and check it against the key concepts a marker looks for."
+        lead="Try each question on your own first, then reveal the model answer and check it against the key concepts."
       />
       <div className="mx-auto max-w-4xl space-y-5 px-4 pt-10 sm:px-6">
         {chapter.essays.map((essay, i) => (

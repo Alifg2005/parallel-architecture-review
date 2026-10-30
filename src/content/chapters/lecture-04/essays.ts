@@ -11,7 +11,7 @@ export const essays: EssayQuestion[] = [
       'The **Von Neumann bottleneck** arises because instructions and data must travel between the CPU and memory, so the speed of that transfer limits overall performance. Sequential processing also cannot exploit work that could be done simultaneously.',
       'Modern CPUs adapt the model. **Pipelining** overlaps the stages of different instructions to raise throughput. **Multi-core** chips contain several Von Neumann cores that run tasks truly in parallel. **SIMD** instructions process multiple data points at once. **Hyper-threading** lets one core run several threads by switching between them efficiently, which mimics parallelism.',
     ],
-    whyItMatters: 'It links classic architecture to parallel architecture. Examiners expect you to name the bottleneck precisely (CPU–memory transfer).',
+    whyItMatters: 'It links classic architecture to parallel architecture. Name the bottleneck precisely: CPU–memory transfer.',
     structure: ['Explain the cycle', 'Define the bottleneck', 'Give four adaptations, one sentence each'],
   },
   {
@@ -26,7 +26,7 @@ export const essays: EssayQuestion[] = [
       '**MISD** (multiple instruction, single data) is rare. It can provide redundancy for fault tolerance, but it has few practical uses.',
       '**MIMD** (multiple instruction, multiple data) covers multi-core CPUs and clusters. It is flexible because each processor runs its own program, but it requires synchronisation and communication, which makes it harder to program.',
     ],
-    whyItMatters: 'The lecture asks you to research the pros and cons of these four classes, so expect a question on them. This answer uses standard background material rather than slide content.',
+    whyItMatters: 'Know the pros and cons of the four classes. They show how the number of instruction and data streams shapes what a machine does well.',
   },
   {
     id: 'l04-e03',
@@ -43,7 +43,7 @@ export const essays: EssayQuestion[] = [
   {
     id: 'l04-e04',
     style: 'compare-contrast',
-    prompt: 'Define data-parallel and task-parallel problems using the lecture\'s notation, and explain which hardware (CPU or GPU) suits each.',
+    prompt: 'Define data-parallel and task-parallel problems using domain-decomposition notation, and explain which hardware (CPU or GPU) suits each.',
     keyConcepts: ['Domain decomposition D = Σ dᵢ', 'f(D) = Σ f(dᵢ)', 'D(S) = Σ dᵢ(S)', 'GPU: same instructions, different data', 'CPU: different task per thread'],
     modelAnswer: [
       'Parallel computing divides a problem\'s domain D into k ≥ 2 parts, D = d₁ + … + d_k, solved by p processors simultaneously.',
@@ -92,7 +92,7 @@ for (int i = 0; i < 1024; i++)
       'C stores 2-D arrays in **row-major** order, so the elements of one row are adjacent in memory.',
       'In version 1 the inner loop varies the **row** index j, so consecutive accesses are 1024 ints (4 KB) apart. Each access touches a different cache line, and lines are evicted before their other elements are used. This is cache thrashing.',
       'Version 2 varies the **column** index in the inner loop, so it walks consecutive addresses. Every cache line loaded is fully used (good spatial locality).',
-      'The lecture\'s run shows the cache-friendly version roughly 10× faster, even though both loops do exactly the same amount of work in Big-O terms.',
+      'In a sample run, the cache-friendly version is roughly 10× faster, even though both loops do exactly the same amount of work in Big-O terms.',
     ],
     whyItMatters: 'It is a concrete example of why real performance differs from theoretical complexity, and of the memory issues raised in Lecture 2.',
   },
@@ -107,7 +107,7 @@ for (int i = 0; i < 1024; i++)
       '**Fine-grained** parallelism (low G) splits the program into many small tasks spread over many processors. This allows wide distribution, but communication and synchronisation overhead can dominate, especially as the system scales.',
       'To measure G, profile computation and communication separately using `MPI_Wtime()`, OpenMP timers or tools such as Vampir, Intel VTune or Valgrind. Higher G usually gives better parallel performance.',
     ],
-    whyItMatters: 'Granularity is in the lecture title and connects directly to scalability (Lecture 3) and to choosing task sizes in OpenMP.',
+    whyItMatters: 'Granularity connects directly to scalability (Lecture 3) and to choosing task sizes in OpenMP.',
   },
   {
     id: 'l04-e09',

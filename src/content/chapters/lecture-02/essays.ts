@@ -12,7 +12,7 @@ export const essays: EssayQuestion[] = [
       '**Multi-core (Idea #1):** transistors are spent on more, simpler cores. Two cores at 0.75× each give 1.5× potential, but only if the program exposes parallelism, for example by splitting the array between threads with pthreads or declaring independent iterations with `forall`. The unmodified program runs on one core and is slower.',
       '**SIMD (Idea #2):** one instruction stream drives many ALUs. With AVX, each instruction processes 8 floats, so each outer-loop step handles 8 array elements (`i += 8`). This works because every iteration performs the same operations. Combining both ideas (for example, 16 cores × 8 lanes) processes 128 elements at once.',
     ],
-    whyItMatters: 'This progression is the backbone of the lecture. A strong answer links each hardware idea to the property of the program it depends on: ILP, independent iterations, or identical work per element.',
+    whyItMatters: 'This progression explains how modern processors gain performance. A strong answer links each hardware idea to the property of the program it depends on: ILP, independent iterations, or identical work per element.',
     structure: ['Simple core baseline', 'Superscalar and its ILP requirement', 'Multi-core and the need to express parallelism', 'SIMD and identical work per element', 'Combined effect'],
   },
   {
@@ -26,7 +26,7 @@ export const essays: EssayQuestion[] = [
       '**Multi-core** places several mostly independent cores on a chip, each running its own instruction stream. The programmer must define independent threads (pthreads, OpenMP `#pragma`, ISPC tasks).',
       '**Multi-threaded execution** keeps several execution contexts on one core and switches between threads when one stalls on a long-latency operation, which hides stalls. The programmer must create **more threads than cores** for this to help.',
     ],
-    whyItMatters: 'The lecture\'s summary table is a likely exam source. The "who is responsible" column is often what separates full marks from partial marks.',
+    whyItMatters: 'Comparing the techniques side by side shows what each one exploits. Knowing who is responsible for the mapping (hardware, compiler or programmer) completes the picture.',
   },
   {
     id: 'l02-e03',
@@ -51,7 +51,7 @@ export const essays: EssayQuestion[] = [
       'Cores each have their own fetch/decode unit, so each core can follow a completely different instruction stream. Coherence is not needed for efficient multi-core parallelism.',
       '**Cache coherence** is unrelated: it concerns keeping copies of the same memory location consistent across the caches of different cores.',
     ],
-    whyItMatters: 'The lecture explicitly warns against confusing the two "coherence" terms, which makes this a classic trap question.',
+    whyItMatters: 'A common point of confusion: the two "coherence" terms sound alike but describe unrelated ideas.',
   },
   {
     id: 'l02-e05',
@@ -64,7 +64,7 @@ export const essays: EssayQuestion[] = [
       '**Caches** keep recently used data close to the core (L1, L2, L3), so accesses that hit are much faster. Caches **reduce** stall length, and they also provide high bandwidth to the CPU.',
       '**Prefetching** predicts which data will be needed soon and loads it into the cache in advance, so later loads hit. It **hides** latency rather than reducing it. A wrong prediction wastes bandwidth and pollutes the cache, which can lower performance.',
     ],
-    whyItMatters: 'The latency/bandwidth distinction is used throughout the course (and in MPI performance later). "Reduce" versus "hide" is a precise distinction examiners like.',
+    whyItMatters: 'The latency/bandwidth distinction is used throughout the course (and in MPI performance later). "Reduce" versus "hide" is a precise distinction worth keeping clear.',
   },
   {
     id: 'l02-e06',
@@ -81,19 +81,19 @@ export const essays: EssayQuestion[] = [
   {
     id: 'l02-e07',
     style: 'trace-code',
-    prompt: 'Interpret the AVX version of sinx. Why does the loop use `i += 8`, and what do `_mm256_load_ps`, `_mm256_mul_ps`, `_mm256_broadcast_ss` and `_mm256_store_ps` do?',
-    code: `for (int i = 0; i < N; i += 8) {
-   __m256 origx = _mm256_load_ps(&x[i]);
-   __m256 numer = _mm256_mul_ps(origx, _mm256_mul_ps(origx, origx));
-   __m256 denom = _mm256_broadcast_ss(&three_fact);
+    prompt: 'Interpret the AVX version of sinx. Why does the loop use `k += 8`, and what do `_mm256_load_ps`, `_mm256_mul_ps`, `_mm256_broadcast_ss` and `_mm256_store_ps` do?',
+    code: `for (int k = 0; k < n; k += 8) {
+   __m256 angle = _mm256_load_ps(&input[k]);
+   __m256 power = _mm256_mul_ps(angle, _mm256_mul_ps(angle, angle));
+   __m256 denom = _mm256_broadcast_ss(&first_denom);
    /* ... */
-   _mm256_store_ps(&result[i], value);
+   _mm256_store_ps(&output[k], sum);
 }`,
     keyConcepts: ['__m256 = 256-bit = 8 floats', 'One instruction, 8 lanes', 'Load/store 8 consecutive floats', 'Broadcast a scalar to all lanes', 'Explicit SIMD via intrinsics'],
     modelAnswer: [
       'A `__m256` value is a 256-bit vector register holding **8 single-precision floats**. Each iteration therefore processes 8 array elements, and the loop advances by 8.',
-      '`_mm256_load_ps(&x[i])` loads `x[i]` … `x[i+7]` into one vector. `_mm256_mul_ps` multiplies two vectors lane by lane, so `numer` gets x³ for all 8 elements with one instruction each step.',
-      '`_mm256_broadcast_ss(&three_fact)` copies the scalar 6 (3!) into all 8 lanes so that it can be used in vector arithmetic. `_mm256_store_ps(&result[i], value)` writes the 8 results back.',
+      '`_mm256_load_ps(&input[k])` loads `input[k]` … `input[k+7]` into one vector. `_mm256_mul_ps` multiplies two vectors lane by lane, so `power` gets x³ for all 8 elements with one instruction each step.',
+      '`_mm256_broadcast_ss(&first_denom)` copies the scalar 6 (3!) into all 8 lanes so that it can be used in vector arithmetic. `_mm256_store_ps(&output[k], sum)` writes the 8 results back.',
       'This is **explicit SIMD**: the programmer requests vector instructions through intrinsics, and the compiled binary contains instructions such as `vmulps` and `vstoreps`.',
     ],
     whyItMatters: 'Reading vector code shows that you understand SIMD lanes concretely, not just the acronym.',

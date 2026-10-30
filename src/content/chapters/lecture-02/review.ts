@@ -24,7 +24,7 @@ export const sections: ReviewSection[] = [
   {
     id: 'running-example',
     title: 'The running example: sin(x) for an array',
-    summary: 'One small program is reused throughout the lecture to show each kind of parallel hardware.',
+    summary: 'One small program is reused throughout this chapter to show each kind of parallel hardware.',
     blocks: [
       {
         type: 'paragraph',
@@ -134,16 +134,17 @@ void parallel_sinx(int N, int terms, float* x, float* result)
    pthread_join(thread_id, NULL);
 }
 
-void my_thread_start(void* thread_arg)
+void* my_thread_start(void* thread_arg)
 {
    my_args* thread_args = (my_args*)thread_arg;
    sinx(thread_args->N, thread_args->terms, thread_args->x, thread_args->result); // do work
+   return NULL;
 }`,
         explanation: [
           'The arguments are packed into a struct because a pthread start routine receives a single `void*` argument.',
           'The new thread computes the **first half** (N/2 elements). The main thread computes the **second half** itself, using the offset pointers `x + args.N`.',
           '`pthread_join` makes the main thread wait for the helper thread before returning. Lecture 5 covers these calls in detail.',
-          'Note: a real pthread start routine is declared as returning `void*`. The slide shortens this.',
+          'A pthread start routine is declared as returning `void*`.',
         ],
       },
       {
@@ -165,7 +166,7 @@ void my_thread_start(void* thread_arg)
       },
       {
         type: 'paragraph',
-        text: 'Scaling up: 4 cores compute 4 elements in parallel, and 16 cores give **16 simultaneous instruction streams**. Real examples from the lecture include a 6-core Intel "Coffee Lake" Core i7 with an integrated GPU, an NVIDIA GTX 1080 with 20 replicated processing cores ("SMs"), the 76-core Intel Xeon Phi "Knights Landing" and the dual-core Apple A9.',
+        text: 'Scaling up: 4 cores compute 4 elements in parallel, and 16 cores give **16 simultaneous instruction streams**. Real examples include a 6-core Intel "Coffee Lake" Core i7 with an integrated GPU, an NVIDIA GTX 1080 with 20 replicated processing cores ("SMs"), the 76-core Intel Xeon Phi "Knights Landing" and the dual-core Apple A9.',
       },
     ],
   },
@@ -194,39 +195,41 @@ void my_thread_start(void* thread_arg)
       {
         type: 'code',
         language: 'c',
-        title: 'Vector program using AVX intrinsics',
+        title: 'Illustrative example (simplified)',
         code: `#include <immintrin.h>
 
-void sinx(int N, int terms, float* x, float* result)
+// Vector version of sinx. Assumes n is a multiple of 8 and the arrays are 32-byte aligned.
+void sinx_avx(int n, int num_terms, float* input, float* output)
 {
-   float three_fact = 6;  // 3!
-   for (int i = 0; i < N; i += 8)
+   float first_denom = 6.0f;   // 3!
+   for (int k = 0; k < n; k += 8)
    {
-      __m256 origx = _mm256_load_ps(&x[i]);
-      __m256 value = origx;
-      __m256 numer = _mm256_mul_ps(origx, _mm256_mul_ps(origx, origx));
-      __m256 denom = _mm256_broadcast_ss(&three_fact);
-      int sign = -1;
+      __m256 angle = _mm256_load_ps(&input[k]);
+      __m256 angle_sq = _mm256_mul_ps(angle, angle);
+      __m256 sum = angle;
+      __m256 power = _mm256_mul_ps(angle, angle_sq);   // x^3
+      __m256 denom = _mm256_broadcast_ss(&first_denom);
+      float sign = -1.0f;
 
-      for (int j = 1; j <= terms; j++)
+      for (int t = 1; t <= num_terms; t++)
       {
-         // value += sign * numer / denom
-         __m256 tmp = _mm256_div_ps(_mm256_mul_ps(_mm256_set1ps(sign), numer), denom);
-         value = _mm256_add_ps(value, tmp);
+         // sum += sign * power / denom
+         __m256 term = _mm256_div_ps(_mm256_mul_ps(_mm256_set1_ps(sign), power), denom);
+         sum = _mm256_add_ps(sum, term);
 
-         numer = _mm256_mul_ps(numer, _mm256_mul_ps(origx, origx));
-         denom = _mm256_mul_ps(denom, _mm256_broadcast_ss((2*j+2) * (2*j+3)));
-         sign *= -1;
+         power = _mm256_mul_ps(power, angle_sq);
+         float factor = (float)((2*t + 2) * (2*t + 3));
+         denom = _mm256_mul_ps(denom, _mm256_broadcast_ss(&factor));
+         sign = -sign;
       }
-      _mm256_store_ps(&result[i], value);
+      _mm256_store_ps(&output[k], sum);
    }
 }`,
         explanation: [
-          '`__m256` is a 256-bit vector holding **8 × 32-bit floats**, so the loop advances by `i += 8`.',
+          '`__m256` is a 256-bit vector holding **8 × 32-bit floats**, so the loop advances by `k += 8`.',
           '`_mm256_load_ps` / `_mm256_store_ps` move 8 consecutive floats between memory and a vector register.',
           '`_mm256_mul_ps`, `_mm256_div_ps` and `_mm256_add_ps` operate on all 8 lanes with one instruction.',
-          '`_mm256_broadcast_ss` copies one scalar into all 8 lanes.',
-          'This code is reproduced from the slide to show the idea. It is simplified, and some calls are not exactly what a compiler accepts (the real intrinsic is `_mm256_set1_ps`, and `broadcast_ss` takes a pointer). The concept is what matters for the exam.',
+          '`_mm256_broadcast_ss` copies one scalar, read through a pointer, into all 8 lanes. `_mm256_set1_ps` does the same from a value.',
         ],
       },
       {
@@ -341,7 +344,7 @@ add r0, r0, r1   ; cannot execute until both loads complete`,
       },
       {
         type: 'paragraph',
-        text: 'A typical cache hierarchy from the lecture has a private **L1 (32 KB)** and **L2 (256 KB)** cache per core, a shared **L3 (8 MB)** cache, and DDR3 DRAM (gigabytes) connected at about **25 GB/s**.',
+        text: 'A typical cache hierarchy has a private **L1 (32 KB)** and **L2 (256 KB)** cache per core, a shared **L3 (8 MB)** cache, and DDR3 DRAM (gigabytes) connected at about **25 GB/s**.',
       },
       {
         type: 'table',
@@ -370,7 +373,7 @@ add r0, r0, r1   ; cannot execute until both loads complete`,
       },
       {
         type: 'table',
-        caption: 'Processor examples from the lecture.',
+        caption: 'Processor examples.',
         columns: ['Processor', 'Cores', 'Per core'],
         rows: [
           ['Intel Core i7', '4 cores', '2 threads (Hyper-Threading), 8-wide AVX or 4-wide SSE SIMD, superscalar'],

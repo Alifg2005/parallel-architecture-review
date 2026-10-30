@@ -4,7 +4,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l06-q01',
     topic: 'OpenMP basics',
-    prompt: 'How is the OpenMP API roughly composed, according to the lecture?',
+    prompt: 'How is the OpenMP API roughly composed?',
     options: [
       'About 80% compiler directives, 19% library calls and 1% environment variables',
       'About 80% library calls, 19% directives and 1% environment variables',
@@ -176,7 +176,7 @@ for (int i = 0; i < 100; i++) sum += i;`,
       'Running independent code blocks (such as two long computations) in parallel, each section on a thread',
     ],
     answer: 3,
-    explanation: 'In the lecture, `long_computation_1()` and `long_computation_2()` are independent, so each `section` can run on its own thread.',
+    explanation: 'For example, `long_computation_1()` and `long_computation_2()` are independent, so each `section` can run on its own thread.',
   },
   {
     id: 'l06-q15',
@@ -215,7 +215,7 @@ for (int i = 0; i < 100; i++) sum += i;`,
       'Tries to acquire the lock without waiting',
     ],
     answer: 2,
-    explanation: 'set acquires, unset releases, init and destroy create and free the lock, and test tries without blocking. The lecture\'s list shuffles these descriptions, but its code example uses them correctly.',
+    explanation: 'set acquires, unset releases, init and destroy create and free the lock, and test tries without blocking.',
   },
   {
     id: 'l06-q18',

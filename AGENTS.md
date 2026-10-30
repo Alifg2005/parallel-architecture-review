@@ -15,8 +15,8 @@ A static study website for the university course **Parallel Computer Architectur
 - **essay / short-answer practice** with model answers,
 - a **20-question multiple-choice quiz** with scored results and explanations.
 
-Midterm scope: Lectures 1–6, planned for Week 9 (the exact day and duration are still to be announced).
-These values live only in `src/content/course.ts`.
+Midterm scope: Lectures 1–6. This value lives only in `src/content/course.ts`. Do not publish a midterm
+date or duration until the owner has confirmed it.
 
 Do not invent a university name, logo, course code, or credentials for the public site. The owner has
 not authorised any branding beyond the owner name and the course name.
@@ -127,8 +127,10 @@ The registry excludes invalid chapters at runtime and logs the errors. The test 
 - Every fact must be supported by the lecture. When general background that the lecture only
   references (for example, a linked video) is needed, label it as background ("Background: …").
   Never claim that something appears in a lecture unless it does.
-- If a slide contains an obvious error (for example, a mismatched function description), teach the
-  correct version and briefly note the discrepancy. Never silently copy the error.
+- If a lecture file contains an obvious error (for example, a mismatched function description), teach
+  the correct version directly, without commenting on the source. Never copy the error.
+- Public content must stand on its own: no "the slide says" or "the lecture asks" wording, no comments
+  on mistakes in the instructor's materials, and no predictions of what an examiner might ask.
 - `npm run verify:build` must pass before you report completion. It scans `dist/` for slide files and
   private paths.
 
@@ -140,8 +142,8 @@ The registry excludes invalid chapters at runtime and logs the errors. The test 
   walls of text.
 - Use `definitions` blocks for terms, `table` for comparisons, `code` (with `explanation` bullets) for
   code, `formula` for equations, and `callout tone="exam"` for exam traps.
-- Code must compile in spirit and match the lecture's API usage. Fix obvious slide typos (for example,
-  `Void main`) and say so in the explanation.
+- Code must compile in spirit and match the lecture's API usage. Fix obvious source typos (for example,
+  `Void main`) and show the correct form.
 - Exam points highlight distinctions and common misunderstandings. Quick revision consists of 6–12
   single-line facts.
 
@@ -160,7 +162,7 @@ The registry excludes invalid chapters at runtime and logs the errors. The test 
 
 - 5–10 prompts per lecture, using a mix of styles: `define-explain`, `compare-contrast`, `process`,
   `advantages-limitations`, `discuss`, `trace-code`.
-- Each prompt has: `keyConcepts` (what a marker looks for), `modelAnswer` (paragraphs or points),
+- Each prompt has: `keyConcepts` (what a strong answer includes), `modelAnswer` (paragraphs or points),
   `whyItMatters`, and, when helpful, a `structure` outline.
 - Model answers teach how to build an answer. They are not paragraphs to memorise.
 

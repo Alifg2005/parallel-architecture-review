@@ -47,6 +47,12 @@ describe('all registered chapters', () => {
       expect(text).not.toMatch(/private-material/i);
       expect(text).not.toMatch(/\.pdf|\.pptx/i);
     });
+
+    it('does not comment on source material or predict exam questions', () => {
+      const text = JSON.stringify(chapter);
+      expect(text).not.toMatch(/\bslides?\b|handout|the lecture|lecture\\?'s|this lecture/i);
+      expect(text).not.toMatch(/examiner|\bmarkers?\b|favourite|expect a question|likely exam|likely to be examined|exam-worthy|exam item|trap question/i);
+    });
   });
 });
 

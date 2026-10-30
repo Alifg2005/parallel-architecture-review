@@ -63,7 +63,7 @@ export interface EssayQuestion {
   id: string;
   style: EssayStyle;
   prompt: string;
-  /** Concepts a marker expects to see. */
+  /** Concepts a strong answer should include. */
   keyConcepts: string[];
   /** Model answer as paragraphs (or point-form lines). */
   modelAnswer: string[];

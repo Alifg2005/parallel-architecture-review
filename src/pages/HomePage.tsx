@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, CalendarDays, CheckCircle2, CircleDashed, Clock3, ListChecks, PenLine, Timer } from 'lucide-react';
+import { ArrowRight, BookOpen, CheckCircle2, CircleDashed, Clock3, ListChecks, PenLine } from 'lucide-react';
 import { course, midterm } from '../content/course';
 import { chapters, getCourseScope } from '../content/registry';
 import { useProgress, type Progress } from '../lib/progress';
@@ -82,11 +82,6 @@ function MidtermSection({ progress }: { progress: Progress }) {
   const attempted = available.filter((e) => e.chapter && progress.quizzes[e.chapter.meta.id]).length;
   const reviewed = available.filter((e) => e.chapter && progress.reviewed[e.chapter.meta.id]).length;
 
-  const facts = [
-    { icon: CalendarDays, label: 'Planned', value: midterm.week },
-    { icon: Clock3, label: 'Exact day', value: midterm.day },
-    { icon: Timer, label: 'Duration', value: midterm.duration },
-  ];
 
   return (
     <section id="midterm" aria-labelledby="midterm-heading" className="mx-auto max-w-6xl scroll-mt-20 px-4 pt-20 sm:px-6">
@@ -100,16 +95,6 @@ function MidtermSection({ progress }: { progress: Progress }) {
           <p className="mt-2 max-w-sm opacity-80">
             The midterm covers the first six lectures. Use the checklist to see what you have reviewed and tested.
           </p>
-          <dl className="mt-7 grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-            {facts.map(({ icon: Icon, label, value }) => (
-              <div key={label} className="rounded-2xl bg-bg/10 p-3.5 dark:bg-bg/60">
-                <dt className="flex items-center gap-1.5 text-xs opacity-70">
-                  <Icon className="size-3.5" aria-hidden /> {label}
-                </dt>
-                <dd className="mt-1 font-medium">{value}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
 
         <div className="min-w-0 rounded-3xl border border-line bg-surface p-6 sm:p-8">

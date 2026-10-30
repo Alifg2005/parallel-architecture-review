@@ -11,9 +11,6 @@ export const course = {
 } as const;
 
 export const midterm = {
-  week: 'Week 9',
-  day: 'To be announced',
-  duration: 'To be announced',
   lectures: [1, 2, 3, 4, 5, 6],
 } as const;
 

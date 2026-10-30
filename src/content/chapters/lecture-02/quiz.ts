@@ -4,7 +4,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l02-q01',
     topic: 'Simple processor',
-    prompt: 'The lecture\'s "very simple processor" (one fetch/decode unit, one ALU, one execution context) executes:',
+    prompt: 'A "very simple processor" (one fetch/decode unit, one ALU, one execution context) executes:',
     options: ['One instruction per clock', 'Two instructions per clock', 'Eight instructions per clock using SIMD', 'One instruction per memory access'],
     answer: 0,
     explanation: 'The baseline processor executes one instruction per clock. Superscalar and SIMD designs are introduced later to go beyond this.',
@@ -54,7 +54,7 @@ mul  r1, r1, r0`,
   {
     id: 'l02-q05',
     topic: 'Idea #1: multi-core',
-    prompt: 'What is "Idea #1" in the lecture?',
+    prompt: 'What is the key idea behind the multi-core design ("Idea #1")?',
     options: [
       'Raise the clock frequency of a single core',
       'Add ALUs that share one fetch/decode unit',
@@ -104,7 +104,7 @@ pthread_join(thread_id, NULL);`,
   {
     id: 'l02-q09',
     topic: 'Data-parallel expression',
-    prompt: 'In the lecture\'s fictitious data-parallel language, what does `forall (int i from 0 to N-1)` communicate?',
+    prompt: 'In a fictitious data-parallel language, what does `forall (int i from 0 to N-1)` communicate?',
     options: [
       'That the loop iterations are independent, so the compiler can generate parallel threaded and SIMD code',
       'That iterations must run strictly in order',
@@ -146,7 +146,7 @@ pthread_join(thread_id, NULL);`,
     prompt: 'An AVX instruction operates on 256-bit registers. How many 32-bit floats does it process at once?',
     options: ['4', '8', '16', '32'],
     answer: 1,
-    explanation: '256 ÷ 32 = 8 lanes. That is why the AVX sinx loop advances with `i += 8`. SSE (128-bit) processes 4 floats.',
+    explanation: '256 ÷ 32 = 8 lanes. That is why the AVX sinx loop advances by 8 elements per step. SSE (128-bit) processes 4 floats.',
   },
   {
     id: 'l02-q13',

@@ -33,7 +33,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l04-q04',
     topic: 'Von Neumann',
-    prompt: 'How does the lecture describe hyper-threading?',
+    prompt: 'Which statement describes hyper-threading?',
     options: [
       'A core executes multiple threads by switching between them efficiently, which mimics parallelism',
       'Several processor chips are installed on one motherboard',
@@ -46,7 +46,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l04-q05',
     topic: 'Concurrency vs parallelism',
-    prompt: 'Which statement defines concurrency, according to the lecture?',
+    prompt: 'Which statement defines concurrency?',
     options: [
       'A run-time property in which tasks execute at the same instant on different cores',
       'A capability that only exists on GPUs',
@@ -106,7 +106,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l04-q10',
     topic: 'Parallel computing',
-    prompt: 'Which is the lecture\'s formal definition of parallel computing?',
+    prompt: 'Which is a formal definition of parallel computing?',
     options: [
       'Solving a problem on one processor with a faster clock',
       'Dividing the domain into k parts and solving them one after another on one processor',
@@ -132,7 +132,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l04-q12',
     topic: 'Timing methods',
-    prompt: 'According to the lecture\'s comparison table, which timing method measures CPU time rather than wall-clock time?',
+    prompt: 'Which timing method measures CPU time rather than wall-clock time?',
     options: ['omp_get_wtime()', 'MPI_Wtime()', 'clock_gettime()', 'clock()'],
     answer: 3,
     explanation: '`clock()` from `<ctime>` measures CPU time at millisecond precision. The others are wall-clock timers, which are better for parallel code.',
@@ -208,7 +208,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l04-q18',
     topic: 'Granularity',
-    prompt: 'What is the main risk of coarse-grained parallelism, according to the lecture?',
+    prompt: 'What is the main risk of coarse-grained parallelism?',
     options: [
       'High communication overhead',
       'Too many tiny tasks to schedule',

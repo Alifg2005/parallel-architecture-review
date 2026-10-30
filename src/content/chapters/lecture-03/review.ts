@@ -7,7 +7,7 @@ export const sections: ReviewSection[] = [
     blocks: [
       {
         type: 'paragraph',
-        text: 'Computational power keeps increasing, but so does the size of our problems. Past performance gains made previously impossible problems solvable (the lecture\'s example is **decoding the human genome**). Many harder problems are still waiting: **climate modelling, protein folding, drug discovery, energy research and data analysis**.',
+        text: 'Computational power keeps increasing, but so does the size of our problems. Past performance gains made previously impossible problems solvable (for example, **decoding the human genome**). Many harder problems are still waiting: **climate modelling, protein folding, drug discovery, energy research and data analysis**.',
       },
       {
         type: 'paragraph',
@@ -50,7 +50,7 @@ export const sections: ReviewSection[] = [
       {
         type: 'callout',
         tone: 'note',
-        text: 'The lecture quotes Steve Jobs: the industry is adding "more and more cores, but nobody knows how to program those things." The point is that the bottleneck has moved from hardware to software.',
+        text: 'Steve Jobs put it this way: the industry is adding "more and more cores, but nobody knows how to program those things." The point is that the bottleneck has moved from hardware to software.',
       },
     ],
   },
@@ -73,7 +73,7 @@ export const sections: ReviewSection[] = [
         type: 'callout',
         tone: 'tip',
         title: 'Why do 4N slow units use less power? (Background)',
-        text: 'The slide asks "Why?" without answering. Standard background: the dynamic power of a chip grows with clock frequency and with the **square of the supply voltage**. Units running at a lower frequency can run at a lower voltage, so many slow units can match the throughput of fewer fast ones while using less total power.',
+        text: 'Background: the dynamic power of a chip grows with clock frequency and with the **square of the supply voltage**. Units running at a lower frequency can run at a lower voltage, so many slow units can match the throughput of fewer fast ones while using less total power.',
       },
     ],
   },
@@ -169,7 +169,7 @@ export const sections: ReviewSection[] = [
       },
       {
         type: 'table',
-        caption: 'The hardware hierarchy shown in the lecture.',
+        caption: 'The hardware hierarchy.',
         columns: ['Level', 'Contains'],
         rows: [
           ['Core', 'Registers, execution units, L1 and L2 cache'],
@@ -228,7 +228,7 @@ export const sections: ReviewSection[] = [
     blocks: [
       {
         type: 'paragraph',
-        text: 'Common metrics include speedup, efficiency, scalability, load balancing, communication overhead, Amdahl\'s and Gustafson\'s laws, latency, bandwidth, overhead, throughput, FLOPS and power consumption (performance per watt). This lecture focuses on the first few.',
+        text: 'Common metrics include speedup, efficiency, scalability, load balancing, communication overhead, Amdahl\'s and Gustafson\'s laws, latency, bandwidth, overhead, throughput, FLOPS and power consumption (performance per watt). The first few are covered here.',
       },
       {
         type: 'formula',
@@ -296,7 +296,7 @@ export const sections: ReviewSection[] = [
         type: 'formula',
         label: 'Whole system',
         expression: 'FLOPS_system = FLOPs/cycle × cycles/second × cores/node × nodes/system',
-        note: 'For an HPC installation, the lecture also gives **FLOPS = racks × FLOPS_system**, which assumes every rack contributes equally (uniform, well-balanced hardware).',
+        note: 'For an HPC installation, a common estimate is **FLOPS = racks × FLOPS_system**, which assumes every rack contributes equally (uniform, well-balanced hardware).',
       },
       {
         type: 'callout',
@@ -306,7 +306,7 @@ export const sections: ReviewSection[] = [
       },
       {
         type: 'paragraph',
-        text: '**Looking ahead:** traditional processors may be reaching their limits. Quantum computers could vastly enhance parallel computation. The lecture cites Google\'s (then unofficial) "quantum supremacy" claim of finishing in 4 minutes what a top supercomputer would need 10,000 years for. Each added qubit doubles the number of states that can be represented (2ⁿ).',
+        text: '**Looking ahead:** traditional processors may be reaching their limits. Quantum computers could vastly enhance parallel computation. One example is Google\'s (then unofficial) "quantum supremacy" claim of finishing in 4 minutes what a top supercomputer would need 10,000 years for. Each added qubit doubles the number of states that can be represented (2ⁿ).',
       },
     ],
   },
@@ -324,7 +324,7 @@ export const examPoints: string[] = [
 ];
 
 export const quickRevision: string[] = [
-  'Human genome decoding is the lecture\'s example of a problem solved thanks to past performance gains.',
+  'Human genome decoding is an example of a problem solved thanks to past performance gains.',
   'Moore\'s Law comes from Moore\'s 1965 paper, and is expected to slow.',
   'Thread-level speculation partitions a single thread speculatively.',
   'Bit-, instruction- and task-level parallelism are the three granularity levels.',

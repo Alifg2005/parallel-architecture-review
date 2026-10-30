@@ -18,5 +18,5 @@ export const meta: ChapterMeta = {
     'Use a DAG to identify which tasks of an algorithm such as merge sort can run in parallel.',
   ],
   sourceNote:
-    "Lecture 4 names SISD, SIMD, MISD and MIMD and points to an external video for the details. The Flynn's taxonomy section below is marked **Background**, because it is standard course knowledge rather than content from the slides.",
+    "The Flynn's taxonomy section below is **Background**: standard knowledge for classifying parallel architectures.",
 };

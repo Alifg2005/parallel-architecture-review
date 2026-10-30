@@ -66,7 +66,7 @@ end do`,
       {
         type: 'code',
         language: 'c',
-        title: 'Signature as used in the lecture',
+        title: 'Signature',
         code: `pthread_create(&tid, &tattr, start_routine, arg);`,
         explanation: [
           '`&tid`: address of a `pthread_t` variable where the **new thread\'s ID is stored**.',
@@ -97,19 +97,19 @@ int main(void) {
         explanation: [
           'The main thread creates a child, prints, and calls `exit(0)`, which **terminates the whole process, including the child**.',
           'Because main does not wait, it may finish before the child is scheduled. The typical output is only `No more Children!`.',
-          'The slide writes `Void main ( )`. That is a typo: use `int main(void)`. The start routine should also `return NULL;`.',
+          'Use `int main(void)`, and the start routine should `return NULL`.',
         ],
       },
       {
         type: 'callout',
         tone: 'warning',
         title: 'The "dummy loop" fix is fragile',
-        text: 'The lecture\'s "improved" example adds `for (int i = 0; i < 10000000; i++);` before `exit(0)` to keep main alive long enough for the child to print `Hello World`. This works by luck of timing, and an optimising compiler may even remove the empty loop. The correct fix is `pthread_join`.',
+        text: 'A common workaround adds `for (int i = 0; i < 10000000; i++);` before `exit(0)` to keep main alive long enough for the child to print `Hello World`. This works by luck of timing, and an optimising compiler may even remove the empty loop. The correct fix is `pthread_join`.',
       },
       {
         type: 'code',
         language: 'c',
-        title: 'Delays with sleep functions (from the lecture)',
+        title: 'Delays with sleep functions',
         code: `#include <unistd.h>       // POSIX: sleep(seconds), usleep(microseconds)
 // #include <windows.h>   // Windows: Sleep(milliseconds), capital S
 
@@ -119,9 +119,9 @@ pthread_create(&child2, NULL, myfunc2, NULL);
 usleep(3000);
 printf("No more Children!\\n");`,
         explanation: [
-          'Delays give each thread time to run, so the lecture\'s output is `Function1 called`, `Function2 called`, `No more Children!`.',
+          'Delays give each thread time to run, so the output is `Function1 called`, `Function2 called`, `No more Children!`.',
           'Units differ by platform: Windows `Sleep(3000)` waits **3000 ms = 3 s**, POSIX `sleep(3)` waits **3 s**, and POSIX `usleep(3000)` waits **3000 µs = 3 ms**.',
-          'The slide comments say `usleep(3000)` waits "3 seconds". That is incorrect, because `usleep` takes **microseconds**.',
+          '`usleep` takes microseconds: `usleep(3000)` waits 3 ms.',
         ],
       },
     ],

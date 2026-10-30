@@ -4,7 +4,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l03-q01',
     topic: 'Physics of scaling',
-    prompt: 'Complete the lecture\'s "physics lesson": smaller transistors → faster processors → …',
+    prompt: 'Complete the chain: smaller transistors → faster processors → …',
     options: [
       'lower power → less heat → more reliable processors',
       'fewer cores → simpler software → lower cost',
@@ -30,7 +30,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l03-q03',
     topic: 'Goals',
-    prompt: 'What is the main goal of parallel computers, according to the lecture?',
+    prompt: 'What is the main goal of parallel computers?',
     options: [
       'Improving performance (execution time or task throughput)',
       'Reducing program size',
@@ -119,7 +119,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l03-q11',
     topic: 'GPUs',
-    prompt: 'How does the lecture describe the GPU design approach?',
+    prompt: 'Which statement describes the GPU design approach?',
     options: [
       'A few complex, superscalar cores',
       'Many simple cores, making it a massively parallel processor',
@@ -140,7 +140,7 @@ export const quiz: QuizQuestion[] = [
       'Cryptography and network routing',
     ],
     answer: 2,
-    explanation: 'The lecture stresses that GPUs combine two previously unrelated fields: computational science and video games.',
+    explanation: 'GPUs combine two previously unrelated fields: computational science and video games.',
   },
   {
     id: 'l03-q13',
@@ -174,7 +174,7 @@ export const quiz: QuizQuestion[] = [
     prompt: 'Modern laptops, desktops and smartphones are examples of which kind of parallel computer?',
     options: ['Distributed memory', 'Hybrid memory', 'Loosely coupled', 'Shared memory'],
     answer: 3,
-    explanation: 'Their cores all access the same memory. Cloud computing is the lecture\'s example of distributed memory.',
+    explanation: 'Their cores all access the same memory. Cloud computing is an example of distributed memory.',
   },
   {
     id: 'l03-q16',

@@ -30,7 +30,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l05-q03',
     topic: 'Pthreads vs OpenMP',
-    prompt: 'Which comparison matches the lecture?',
+    prompt: 'Which comparison is correct?',
     options: [
       'Pthreads is high-level and aimed at scientific loops; OpenMP is low-level',
       'OpenMP gives fine-grained control; Pthreads hides thread management',
@@ -43,7 +43,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l05-q04',
     topic: 'Pthreads vs OpenMP',
-    prompt: 'Why does the lecture advise against mixing Pthreads and OpenMP in one program?',
+    prompt: 'Why should Pthreads and OpenMP not be mixed in one program?',
     options: [
       'They cannot be compiled together',
       'OpenMP does not support C',
@@ -90,7 +90,7 @@ int main(void) {
   {
     id: 'l05-q07',
     topic: 'Thread lifetime',
-    prompt: 'In the "improved" Hello World example, what is the purpose of `for (int i = 0; i < 10000000; i++);` before `exit(0)`?',
+    prompt: 'In a Hello World program, what is the purpose of `for (int i = 0; i < 10000000; i++);` before `exit(0)`?',
     options: [
       'It computes a value that the child thread needs',
       'It keeps the main thread alive briefly so the child can print, which is a timing-based workaround rather than real synchronisation',
@@ -106,7 +106,7 @@ int main(void) {
     prompt: 'On a POSIX system, how long does `usleep(3000);` pause?',
     options: ['3 seconds', '3000 seconds', '3 milliseconds', '3 minutes'],
     answer: 2,
-    explanation: '`usleep` takes microseconds: 3000 µs = 3 ms. The slide\'s comment says 3 seconds. That would be `sleep(3)` on POSIX or `Sleep(3000)` on Windows.',
+    explanation: '`usleep` takes microseconds: 3000 µs = 3 ms. A 3-second pause would be `sleep(3)` on POSIX or `Sleep(3000)` on Windows.',
   },
   {
     id: 'l05-q09',
@@ -189,7 +189,7 @@ int main(void) {
   {
     id: 'l05-q15',
     topic: 'Mutex best practices',
-    prompt: 'Which is a mutex best practice from the lecture?',
+    prompt: 'Which is a mutex best practice?',
     options: [
       'Minimise the time spent in the critical section, and always unlock afterwards',
       'Hold the lock for as long as possible to be safe',
@@ -236,7 +236,7 @@ int main(void) {
   {
     id: 'l05-q19',
     topic: 'Pthreads vs OpenMP',
-    prompt: 'When does the lecture recommend choosing Pthreads over OpenMP?',
+    prompt: 'When is it better to choose Pthreads over OpenMP?',
     options: [
       'When you want to parallelise a simple loop quickly',
       'For scientific computations using pragmas',

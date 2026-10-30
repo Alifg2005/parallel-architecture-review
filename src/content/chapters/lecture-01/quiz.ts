@@ -7,7 +7,7 @@ export const quiz: QuizQuestion[] = [
     prompt: 'Roughly when did processors hit the power density ("thermal") wall that ended rapid clock-speed increases?',
     options: ['Around 1985', 'Around 2004', 'Around 1995', 'Around 2015'],
     answer: 1,
-    explanation: 'The lecture places the inflection point around 2004, when Intel acknowledged hitting a thermal wall and shifted to multi-core designs.',
+    explanation: 'The inflection point came around 2004, when Intel acknowledged hitting a thermal wall and shifted to multi-core designs.',
   },
   {
     id: 'l01-q02',
@@ -93,7 +93,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l01-q09',
     topic: 'Programmer perspective',
-    prompt: 'After 2004, what is the lecture\'s answer to "How do you make your program run faster?"',
+    prompt: 'After 2004, what is the best answer to "How do you make your program run faster?"',
     options: [
       'Wait six months and buy a new machine',
       'Increase the processor\'s clock frequency',
@@ -200,7 +200,7 @@ export const quiz: QuizQuestion[] = [
   {
     id: 'l01-q18',
     topic: 'Communication overhead',
-    prompt: 'What does the lecture\'s communication-overhead handout emphasise?',
+    prompt: 'What is the main effect of communication overhead on a parallel computation?',
     options: [
       'Communication overhead can significantly limit the speedup of a parallel computation',
       'Communication overhead affects only sequential programs',

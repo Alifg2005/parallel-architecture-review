@@ -42,7 +42,7 @@ export const sections: ReviewSection[] = [
   {
     id: 'flynn',
     title: "Flynn's taxonomy: SISD, SIMD, MISD, MIMD (background)",
-    summary: 'The lecture lists these four classes and asks you to research their pros and cons. Here is the standard summary.',
+    summary: 'The four classes of Flynn\'s taxonomy, with their pros and cons.',
     blocks: [
       {
         type: 'table',
@@ -57,7 +57,7 @@ export const sections: ReviewSection[] = [
       {
         type: 'callout',
         tone: 'note',
-        text: '**Background:** this table is standard course knowledge. The slides only name the four classes and link to an external video. Lecture 2 covers SIMD in depth.',
+        text: '**Background:** this table is standard course knowledge. Lecture 2 covers SIMD in depth.',
       },
     ],
   },
@@ -155,7 +155,7 @@ printf("Sequential Time taken: %.6f seconds\\n", sequential_elapsed);`,
       },
       {
         type: 'table',
-        caption: 'Timing methods compared in the lecture.',
+        caption: 'Common timing methods compared.',
         columns: ['Method', 'Header', 'Precision', 'Measures', 'Portability'],
         rows: [
           ['`clock()`', '`<ctime>`', 'Milliseconds', 'CPU time', 'Cross-platform'],
@@ -225,7 +225,7 @@ for (int i = 0; i < 1024; i++)
           'C stores 2-D arrays in **row-major** order: `matrix[i][0..1023]` are adjacent in memory.',
           '`matrix[j][i]` with `j` in the inner loop jumps a whole row (4 KB) on every access, so each access touches a new cache line, which is **cache thrashing**.',
           '`matrix[i][j]` walks consecutive addresses, so each cache line loaded is fully used.',
-          'The lecture\'s sample run shows the cache-friendly loop about **10× faster** (≈0.012 s vs ≈0.123 s).',
+          'A sample run shows the cache-friendly loop about **10× faster** (≈0.012 s vs ≈0.123 s).',
         ],
       },
     ],

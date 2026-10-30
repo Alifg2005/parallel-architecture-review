@@ -25,7 +25,7 @@ export const essays: EssayQuestion[] = [
       '**Cost efficiency, scalability and reduced complexity:** it is harder to design a single unit that performs as well as N simpler units, and replicated simple units scale more easily.',
       '**Dependability:** redundant execution in space (running the same work on several units) allows faults to be detected or tolerated.',
     ],
-    whyItMatters: 'Examiners often ask for the "other goals" besides speed. The power argument in particular is a favourite.',
+    whyItMatters: 'Parallelism is about more than speed: power, cost, scalability and dependability also matter. The power argument shows why many slower units can beat one fast unit.',
   },
   {
     id: 'l03-e03',
@@ -38,7 +38,7 @@ export const essays: EssayQuestion[] = [
       '**Task-level parallelism** runs different tasks or threads in parallel. It is exploited by multithreading and multiprocessing.',
       'In terms of granularity, **bit-level** parallelism processes multiple bits at once, **instruction-level** runs instructions from the same stream in parallel, and **task-level** runs separate instruction streams in parallel, moving from fine to coarse.',
     ],
-    whyItMatters: 'Classification questions are common. Matching each technique to the correct type shows real understanding.',
+    whyItMatters: 'Matching each technique to the correct type shows real understanding.',
   },
   {
     id: 'l03-e04',
@@ -63,7 +63,7 @@ export const essays: EssayQuestion[] = [
       'A **multiprocessor system** contains multiple **physical processors**, each possibly multi-core. Each processor may have its own memory and cache, though some systems share memory.',
       '**Tightly coupled** multiprocessors share memory. They must handle cache coherence and bandwidth, which is more complex with several processors (some use NUMA designs), but access to shared data is fast. **Loosely coupled** multiprocessors give each processor its own memory. They avoid coherence mechanisms but must use message passing (MPI) to share data.',
     ],
-    whyItMatters: 'Terms such as "multi-core", "multiprocessor", "tightly coupled" and "loosely coupled" are easy to blur. Precise definitions earn marks.',
+    whyItMatters: 'Terms such as "multi-core", "multiprocessor", "tightly coupled" and "loosely coupled" are easy to blur, so define them precisely.',
   },
   {
     id: 'l03-e06',
@@ -76,7 +76,7 @@ export const essays: EssayQuestion[] = [
       '**Scalability:** repeat the parallel run with 1, 2, 4, 8 … threads and watch how efficiency changes. Under **strong scaling** the problem size is fixed, so time should ideally fall in proportion to the thread count. A well-scaling program loses little efficiency.',
       '**Example:** T₁ = 120 s and T₈ = 20 s give S = 6 and E = 6/8 = 0.75. If 16 threads gave 15 s, then S = 8 and E = 0.5, so scaling is degrading, perhaps because of communication overhead in fine-grained tasks or data dependencies.',
     ],
-    whyItMatters: 'Metric calculations are the most "computable" exam questions. Interpreting the numbers is what earns the remaining marks.',
+    whyItMatters: 'Calculating the metrics is only half the job. Interpreting the numbers shows what is limiting the program.',
   },
   {
     id: 'l03-e07',
@@ -100,6 +100,6 @@ export const essays: EssayQuestion[] = [
       'Per core: FLOPS_core = FLOPs/cycle × cycles/second. Multi-core adds a factor: FLOPS_node = FLOPs/cycle × cycles/second × cores/node. Adding nodes gives FLOPS_system = … × nodes/system. For a data centre, total = racks × FLOPS_system, assuming every rack is identical and balanced.',
       'Example: 16 × 2.5×10⁹ × 8 = 3.2×10¹¹ FLOPS = **320 GFLOPS** per node.',
     ],
-    whyItMatters: 'Shows how explicit parallelism (cores, nodes, racks) multiplies peak performance, which is a straightforward calculation question.',
+    whyItMatters: 'Shows how explicit parallelism (cores, nodes, racks) multiplies peak performance.',
   },
 ];

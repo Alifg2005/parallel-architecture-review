@@ -12,7 +12,7 @@ export const essays: EssayQuestion[] = [
       'Both are **shared-memory** models. Choose Pthreads when you need fine-grained control over thread creation, scheduling and synchronisation. Choose OpenMP when you want to parallelise loops or large computations simply.',
       'Mixing them is discouraged because each manages threads in its own way. The interaction can cause poor performance (for example, oversubscribing cores).',
     ],
-    whyItMatters: 'The comparison frames both programming lectures. The lecture gives this exact table and these exact usage rules.',
+    whyItMatters: 'Choosing a threading model decides how much control you have and how much code you must write.',
   },
   {
     id: 'l05-e02',
@@ -29,10 +29,10 @@ int main(void) {
     keyConcepts: ['Main does not wait', 'exit() ends the whole process', 'Scheduling is nondeterministic', 'Dummy loop is fragile', 'pthread_join is correct'],
     modelAnswer: [
       'The main thread creates the child, prints "No more Children!", and immediately calls `exit(0)`, which terminates the entire process, including the child. The child usually has not been scheduled yet, so the typical output is only **"No more Children!"**. The exact behaviour depends on scheduling.',
-      '**Fix 1 (the lecture\'s dummy loop):** add a long empty loop before `exit(0)` so that main stays alive long enough for the child to print. This relies on timing, wastes CPU, and can be optimised away by the compiler, so it is not reliable.',
+      '**Fix 1 (a dummy loop):** add a long empty loop before `exit(0)` so that main stays alive long enough for the child to print. This relies on timing, wastes CPU, and can be optimised away by the compiler, so it is not reliable.',
       '**Fix 2 (correct):** call `pthread_join(child1, NULL)` before exiting. Main then blocks until the child finishes, which guarantees that "Hello World" is printed.',
     ],
-    whyItMatters: 'Predicting thread output is a common exam task. It tests whether you understand that thread scheduling is not ordered unless you synchronise.',
+    whyItMatters: 'Predicting thread output tests whether you understand that thread scheduling is not ordered unless you synchronise.',
   },
   {
     id: 'l05-e03',
@@ -44,7 +44,7 @@ int main(void) {
       '`pthread_join(tid, NULL)` blocks the caller until thread `tid` terminates. `NULL` means no return value is collected. It is the proper way to make main wait.',
       'For N threads, declare `pthread_t tid[N]`. First loop over `i` calling `pthread_create(&tid[i], NULL, work, NULL)`. Then, in a second loop, call `pthread_join(tid[i], NULL)`. Creating all the threads before joining lets them run concurrently. Joining inside the first loop would serialise them.',
     ],
-    whyItMatters: 'Correct API use is the foundation of the lab work, and the "create all, then join all" pattern is exam-worthy.',
+    whyItMatters: 'Correct API use is the foundation of the lab work, and the "create all, then join all" pattern is worth remembering.',
   },
   {
     id: 'l05-e04',
@@ -56,7 +56,7 @@ int main(void) {
       'The code that accesses shared data is a **critical section**. A **mutex** ensures that only one thread at a time executes it: a thread **locks** the mutex before entering and **unlocks** it when leaving, and any other thread that tries to lock in the meantime waits.',
       'Lifecycle: `pthread_mutex_init(&lock, NULL)` before use, then `pthread_mutex_lock` / `pthread_mutex_unlock` around each critical section, and finally `pthread_mutex_destroy(&lock)` once all threads have finished. Used this way, the mutex prevents data corruption and makes the code thread-safe.',
     ],
-    whyItMatters: 'Synchronisation is the core difficulty of shared-memory programming, and it is the most examined Pthreads topic.',
+    whyItMatters: 'Synchronisation is the core difficulty of shared-memory programming.',
     structure: ['Define a race condition with an example', 'Define a critical section', 'Explain mutual exclusion', 'Give the four lifecycle calls'],
   },
   {
@@ -98,12 +98,12 @@ pthread_create(&child1, NULL, myfunc1, &i);`,
       'Inside the thread, `(int *)p` casts the generic pointer back to an `int*`, and the leading `*` dereferences it to obtain the value. The output is "Function1 called - 4".',
       'The thread reads the variable at some later time. If main passes `&i` of a loop counter and the loop then increments `i`, several threads may read the same or already-changed values. The variable must stay valid and unchanged until the thread has read it, for example by using a separate array element per thread.',
     ],
-    whyItMatters: 'Argument passing through `void*` is a frequent source of bugs and code-tracing questions.',
+    whyItMatters: 'Argument passing through `void*` is a frequent source of bugs.',
   },
   {
     id: 'l05-e07',
     style: 'advantages-limitations',
-    prompt: 'State the mutex best practices from the lecture and give typical uses of mutexes. Why does each practice matter?',
+    prompt: 'State mutex best practices and give typical uses of mutexes. Why does each practice matter?',
     keyConcepts: ['Consistent lock order', 'Short critical sections', 'Always unlock', 'Counters', 'Shared arrays/lists', 'Ordered printing'],
     modelAnswer: [
       '**Always lock and unlock mutexes in the same order.** When several mutexes are involved, inconsistent ordering lets two threads each hold one lock while waiting for the other, which causes deadlock.',

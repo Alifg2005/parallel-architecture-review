@@ -11,7 +11,7 @@ For every available lecture, it provides a structured review, essay practice wit
 - **Runtime:** a pure static SPA. There is no backend, no database, no login, and no AI or API calls.
 - **Privacy:** progress and theme are stored only in the visitor's browser (`localStorage`).
 
-## Contents (midterm scope: Lectures 1–6, Week 9)
+## Contents (midterm scope: Lectures 1–6)
 
 | # | Lecture | Source used |
 |---|---------|-------------|
@@ -116,11 +116,10 @@ CLI alternative: `npx vercel` (preview) and then `npx vercel --prod`.
 
 ## Notes on accuracy
 
-- Content is written from the lecture files only. Where a lecture **names** a topic without teaching it
-  (Flynn's taxonomy in Lecture 4, the "Why?" behind the power claim in Lecture 3, latency and throughput in
-  Lecture 1), the explanation is labelled **Background**.
-- Obvious slide errors are taught correctly and flagged in place: `usleep(3000)` is 3 ms, not 3 s
-  (Lecture 5); the OpenMP lock functions are listed with shifted descriptions (Lecture 6); and
-  `Void main` and the AVX intrinsic names are slide typos (Lectures 2 and 5).
-- Some slides refer to handouts on Blackboard (communication overhead, merge-sort benchmarking).
-  Those handouts were not provided, so their calculations are not reproduced.
+- Content is written from the lecture files. General knowledge that goes beyond them (Flynn's taxonomy,
+  the reason slower units use less power, the definitions of latency and throughput) is labelled
+  **Background** on the site.
+- Technical explanations are presented directly, in correct form. The site does not comment on the source
+  material or predict exam questions.
+- The Blackboard handouts on communication overhead and merge-sort benchmarking were not provided, so
+  their calculations are not reproduced.

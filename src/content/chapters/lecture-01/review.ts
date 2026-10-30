@@ -20,7 +20,7 @@ export const sections: ReviewSection[] = [
       },
       {
         type: 'paragraph',
-        text: 'Historically, parallel computing first grew out of **scientific computing\'s** demand for more computational power. From the early 1990s, **databases** handling millions of web-service transactions per second became another driving application (for example, the Sun Enterprise 10000 with 16 UltraSPARC-II processors around 1997). The lecture notes that this class of machine was eventually overtaken by cloud computing.',
+        text: 'Historically, parallel computing first grew out of **scientific computing\'s** demand for more computational power. From the early 1990s, **databases** handling millions of web-service transactions per second became another driving application (for example, the Sun Enterprise 10000 with 16 UltraSPARC-II processors around 1997). This class of machine was eventually overtaken by cloud computing.',
       },
     ],
   },
@@ -35,7 +35,7 @@ export const sections: ReviewSection[] = [
       },
       {
         type: 'table',
-        columns: ['Driver', 'What improved', 'Example from the lecture'],
+        columns: ['Driver', 'What improved', 'Example'],
         rows: [
           ['Wider data paths', 'More bits processed per operation', '4-bit → 8 → 16 → 32 → 64-bit'],
           ['More efficient pipelining', 'Fewer clock cycles per instruction (CPI)', 'About 3.5 CPI → about 1.1 CPI'],
@@ -66,7 +66,7 @@ export const sections: ReviewSection[] = [
       },
       {
         type: 'paragraph',
-        text: 'The lecture cites a 2004 New York Times report: Intel publicly acknowledged that it had hit a thermal wall, cancelled two planned processor designs, and turned to a strategy its rivals had already adopted, which was **putting multiple processors on a single chip** instead of making one processor run faster.',
+        text: 'A 2004 New York Times report described the turning point: Intel publicly acknowledged that it had hit a thermal wall, cancelled two planned processor designs, and turned to a strategy its rivals had already adopted, which was **putting multiple processors on a single chip** instead of making one processor run faster.',
       },
       {
         type: 'list',
@@ -150,7 +150,7 @@ export const sections: ReviewSection[] = [
       },
       {
         type: 'paragraph',
-        text: 'Parallel machines are now everywhere. The lecture\'s examples include a 6-core Intel Core i9 with an integrated GPU on the same chip, a GPU with 24 major processing blocks, phone chips such as the Apple A12 (4 CPU cores, 4 GPU cores and a neural engine, in a design heavily shaped by **power constraints**), and the Summit supercomputer (4,608 nodes, each with two 22-core CPUs and 6 GPUs).',
+        text: 'Parallel machines are now everywhere. Examples include a 6-core Intel Core i9 with an integrated GPU on the same chip, a GPU with 24 major processing blocks, phone chips such as the Apple A12 (4 CPU cores, 4 GPU cores and a neural engine, in a design heavily shaped by **power constraints**), and the Summit supercomputer (4,608 nodes, each with two 22-core CPUs and 6 GPUs).',
       },
     ],
   },
@@ -183,7 +183,7 @@ export const sections: ReviewSection[] = [
       {
         type: 'callout',
         tone: 'note',
-        text: 'The lecture asks "What is latency? Throughput? Scheduling?" without defining them on the slide. The definitions above are standard background. Lecture 2 defines memory latency and bandwidth precisely.',
+        text: 'Background: these definitions are standard. Lecture 2 defines memory latency and bandwidth precisely.',
       },
     ],
   },
@@ -221,7 +221,7 @@ export const sections: ReviewSection[] = [
         type: 'callout',
         tone: 'warning',
         title: 'Communication overhead',
-        text: 'Parallel computation can theoretically speed up processing, but **communication overhead** between processors can significantly limit that speedup. This makes it a critical factor in parallel algorithm design. The course illustrates it with a parallel matrix-multiplication handout.',
+        text: 'Parallel computation can theoretically speed up processing, but **communication overhead** between processors can significantly limit that speedup. This makes it a critical factor in parallel algorithm design. Parallel matrix multiplication is a standard illustration of this effect.',
       },
     ],
   },
