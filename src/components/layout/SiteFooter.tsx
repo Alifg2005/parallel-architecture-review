@@ -14,7 +14,8 @@ export function SiteFooter() {
           </div>
           <p className="max-w-sm text-sm text-muted">
             An independent study companion built by {course.owner}. The notes and questions are original summaries
-            written for revision.
+            written for revision. Unofficial study aid, not affiliated with the university. AI-assisted content;
+            verify with your course materials.
           </p>
         </div>
         <nav aria-label="Lectures" className="text-sm">
